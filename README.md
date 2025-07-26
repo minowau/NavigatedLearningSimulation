@@ -96,7 +96,4 @@ npm start
 - If ports are busy, stop other servers or use alternate ports.
 - For model loading errors, ensure the `.pth` file matches the DQN architecture.
 
----
-
-## License
-MIT or your preferred license. 
+ 
