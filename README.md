@@ -90,20 +90,6 @@ npm start
 
 ---
 
-## Customization
-- **Change Model:** Edit `model_path` in `web_simulation_backend/main.py` to use a different `.pth` file.
-- **Multi-Agent:** Extend backend and frontend to support multiple agents (see `simulation.py` for logic inspiration).
-- **Deployment:**
-  - Backend: Deploy with Uvicorn/Gunicorn on any server.
-  - Frontend: Deploy with Vercel, Netlify, or any static host.
-
----
-
-## Credits
-- DQN logic and resource data adapted from your original Pygame simulation.
-- Web frontend and backend integration by AI assistant.
-
----
 
 ## Troubleshooting
 - If you see CORS errors, ensure backend is running with CORS enabled (already set in `main.py`).
