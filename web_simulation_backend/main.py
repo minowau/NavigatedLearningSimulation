@@ -74,6 +74,51 @@ action_size = 2
 # Models dictionary to store loaded models
 models = {}
 
+# --- Helpers: robust model loading ---
+def _strip_prefix_from_state_dict_keys(state_dict: Dict[str, Any], prefix: str) -> Dict[str, Any]:
+    if all(k.startswith(prefix) for k in state_dict.keys()):
+        return {k[len(prefix):]: v for k, v in state_dict.items()}
+    return state_dict
+
+def _normalize_state_dict_keys(state_dict: Dict[str, Any]) -> Dict[str, Any]:
+    # Handle common wrappers and prefixes (e.g., DataParallel 'module.')
+    normalized = _strip_prefix_from_state_dict_keys(state_dict, "module.")
+
+    # Map some common layer naming schemes to our DQN's 'fc1' and 'fc2'
+    key_map = {
+        "layers.0.weight": "fc1.weight",
+        "layers.0.bias": "fc1.bias",
+        "layers.2.weight": "fc2.weight",
+        "layers.2.bias": "fc2.bias",
+        "linear1.weight": "fc1.weight",
+        "linear1.bias": "fc1.bias",
+        "linear2.weight": "fc2.weight",
+        "linear2.bias": "fc2.bias",
+    }
+
+    remapped = {}
+    for k, v in normalized.items():
+        target_key = key_map.get(k, k)
+        remapped[target_key] = v
+    return remapped
+
+def _load_weights_into_model(model: torch.nn.Module, weights: Dict[str, Any]) -> bool:
+    try:
+        normalized = _normalize_state_dict_keys(weights)
+        # Convert numpy arrays to tensors if needed
+        for k, v in list(normalized.items()):
+            if isinstance(v, np.ndarray):
+                normalized[k] = torch.from_numpy(v)
+        missing, unexpected = model.load_state_dict(normalized, strict=False)
+        if missing:
+            print(f"Warning: missing keys when loading model: {missing}")
+        if unexpected:
+            print(f"Warning: unexpected keys when loading model: {unexpected}")
+        return True
+    except Exception as e:
+        print(f"Failed to load weights into model: {e}")
+        return False
+
 # --- API Endpoints ---
 @app.get("/grid")
 def get_grid():
@@ -91,8 +136,26 @@ def get_state():
     }
 
 @app.post("/step")
-def step():
+async def step():
+    # Initialize ensemble voting
+    action_votes = {0: 0, 1: 0}  # 0: UP, 1: RIGHT
+    ensemble_pos = None
+    
+    # If ensemble state doesn't exist yet, create it
+    if "ensemble" not in sim_states and active_models:
+        # Initialize ensemble state with the same structure as model states
+        # but with its own path tracking
+        first_model = next(iter(active_models))
+        if first_model in sim_states:
+            sim_states["ensemble"] = {
+                "agent_pos": sim_states[first_model]["agent_pos"].copy(),
+                "path": [sim_states[first_model]["agent_pos"].copy()],
+                "goal_pos": sim_states[first_model]["goal_pos"].copy(),
+                "reward": 0
+            }
+    
     results = {}
+    # First pass: collect votes from all models
     for model_name in active_models:
         if model_name not in models or model_name not in sim_states:
             continue
@@ -103,12 +166,15 @@ def step():
         ax, ay = sim_state["agent_pos"]
         goal_pos = sim_state["goal_pos"]
         path = sim_state["path"]
-        state = ay * GRID_SIZE_X + ax
+        state = int(ay) * GRID_SIZE_X + int(ax)
         state_tensor = torch.eye(state_size)[state].unsqueeze(0).to(device)
         
         with torch.no_grad():
             q_values = model(state_tensor)
             action = torch.argmax(q_values).item()
+        
+        # Add vote for this model's preferred action
+        action_votes[action] += 1
             
         # Calculate if agent has reached goal
         goal_reached = (ax == sim_state["goal_pos"][0] and ay == sim_state["goal_pos"][1])
@@ -144,11 +210,62 @@ def step():
                         break
                 else:
                     # Default reward if no specific resource match found
-                    sim_state["reward"] += float(x_coord)*40 + float(y_coord)*50
+                    sim_state["reward"] += 10
                 
         sim_state["path"] = path
         sim_states[model_name] = sim_state
         results[model_name] = sim_state
+    
+    # Second pass: determine winning action by voting for ensemble agent
+    if "ensemble" in sim_states and active_models:
+        # Get ensemble state
+        ensemble_state = sim_states["ensemble"]
+        ex, ey = ensemble_state["agent_pos"]
+        ensemble_path = ensemble_state["path"]
+        
+        # Calculate if ensemble agent has reached goal
+        goal_reached = (ex == ensemble_state["goal_pos"][0] and ey == ensemble_state["goal_pos"][1])
+        
+        # Determine winning action (soft voting)
+        if not goal_reached:
+            winning_action = max(action_votes.items(), key=lambda kv: kv[1])[0]
+            
+            # Move ensemble agent according to winning action
+            if winning_action == 0 and ey < GRID_SIZE_Y - 1:
+                ey += 1  # UP
+            elif winning_action == 1 and ex < GRID_SIZE_X - 1:
+                ex += 1  # RIGHT
+            
+            # Update ensemble position and path
+            ensemble_state["agent_pos"] = [ex, ey]
+            if [ex, ey] not in ensemble_path:
+                ensemble_path.append([ex, ey])
+                # Check if ensemble agent found a resource
+                if [ex, ey] in adjusted_resources:
+                    # Find which resource was found based on position
+                    for resource_name, data in resource_data.items():
+                        # Convert coordinates to grid positions
+                        x_coord = float(data["x_coordinate"])
+                        y_coord = float(data["y_coordinate"])
+                        
+                        # Scale coordinates to grid positions (approximate)
+                        grid_x = int(x_coord * GRID_SIZE_X)
+                        grid_y = int(y_coord * GRID_SIZE_Y)
+                        
+                        # If agent position matches this resource's position
+                        if ex == grid_x and ey == grid_y:
+                            # Calculate reward based on coordinates
+                            reward_value = int((x_coord + y_coord) * 50)
+                            reward_value = max(10, reward_value)
+                            ensemble_state["reward"] += reward_value
+                            break
+                    else:
+                        # Default reward if no specific resource match found
+                        ensemble_state["reward"] += 10
+            
+            ensemble_state["path"] = ensemble_path
+            sim_states["ensemble"] = ensemble_state
+            results["ensemble"] = ensemble_state
         
     return {
         "active_models": active_models,
@@ -165,6 +282,14 @@ def reset():
                 "goal_pos": [GRID_SIZE_X - 1, GRID_SIZE_Y - 1],
                 "reward": 0
             }
+        if 'ensemble' in sim_states:
+            sim_states['ensemble'] = {
+                "agent_pos": [0, 0],
+                "path": [[0, 0]],
+                "goal_pos": [GRID_SIZE_X - 1, GRID_SIZE_Y - 1],
+                "reward": 0
+            }
+            
     
     return {
         "active_models": active_models,
@@ -174,8 +299,9 @@ def reset():
 @app.get("/models", response_model=List[str])
 def list_models():
     # List all .pth files in the project root
-    model_files = [f for f in os.listdir(os.path.join(os.path.dirname(__file__), "..")) if f.endswith('.pth')]
+    model_files = [f for f in os.listdir(os.path.join(os.path.dirname(__file__), "..")) if f.endswith('.pth') or f.endswith('.npz')]
     return model_files
+    
 
 @app.post("/set_active_models")
 async def set_active_models(request: Request):
@@ -194,14 +320,38 @@ async def set_active_models(request: Request):
         if model_name not in models:
             try:
                 model = DQN(state_size, action_size).to(device)
-                # Try to load as state dict first
-                model_data = torch.load(model_path, map_location=device)
-                # Check if it's a state dict with our expected keys
-                if isinstance(model_data, dict) and "fc1.weight" in model_data:
-                    model.load_state_dict(model_data)
+                loaded_ok = False
+
+                ext = os.path.splitext(model_path)[1].lower()
+                if ext == ".npz":
+                    try:
+                        npz = np.load(model_path, allow_pickle=True)
+                        weights = {k: npz[k] for k in npz.files}
+                        loaded_ok = _load_weights_into_model(model, weights)
+                    except Exception as e:
+                        print(f"Error loading npz model {model_name}: {e}")
+                        loaded_ok = False
                 else:
-                    # Just use a placeholder model since we can't load the actual weights
-                    pass
+                    try:
+                        obj = torch.load(model_path, map_location=device)
+                        # Case 1: raw state_dict
+                        if isinstance(obj, dict):
+                            # Some checkpoints use {'state_dict': ...}
+                            if "state_dict" in obj and isinstance(obj["state_dict"], dict):
+                                loaded_ok = _load_weights_into_model(model, obj["state_dict"])
+                            else:
+                                loaded_ok = _load_weights_into_model(model, obj)
+                        # Case 2: full nn.Module saved
+                        elif hasattr(obj, "state_dict"):
+                            loaded_ok = _load_weights_into_model(model, obj.state_dict())
+                        else:
+                            loaded_ok = False
+                    except Exception as e:
+                        print(f"Error loading pth model {model_name}: {e}")
+                        loaded_ok = False
+
+                if not loaded_ok:
+                    print(f"Using randomly initialized weights for {model_name} (could not load).")
                 model.eval()
                 models[model_name] = model
             except Exception as e:

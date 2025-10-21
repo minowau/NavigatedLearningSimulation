@@ -17,6 +17,7 @@ function App() {
   
   // Model colors for visualization
   const MODEL_COLORS = {
+    ensemble: '#FFFF00',
     0: '#FF0000', // Red
     1: '#0000FF', // Blue
     2: '#00FF00', // Green
@@ -27,6 +28,7 @@ function App() {
     7: '#008000', // Dark Green
     8: '#000080', // Navy
     9: '#800000', // Maroon
+     // Yellow for ensemble path
   };
 
   // Fetch grid info and models on mount
@@ -93,7 +95,64 @@ function App() {
       CELL_SIZE, CELL_SIZE
     );
     
-    // Draw paths and agents for each active model
+    // First draw the ensemble path if it exists
+    if (simulationData.states && simulationData.states.ensemble) {
+      const ensembleState = simulationData.states.ensemble;
+      const ensemblePathColor = MODEL_COLORS.ensemble;
+      
+      // Draw ensemble path with thicker lines and special highlighting
+      ensembleState.path.forEach((pos, stepIndex) => {
+        const [px, py] = pos;
+        const gradientIntensity = 0.4 + (0.6 * stepIndex / Math.max(ensembleState.path.length, 1));
+        const r = parseInt(ensemblePathColor.slice(1, 3), 16);
+        const g = parseInt(ensemblePathColor.slice(3, 5), 16);
+        const b = parseInt(ensemblePathColor.slice(5, 7), 16);
+        
+        // Draw a slightly larger rectangle for the ensemble path
+        ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${gradientIntensity})`;
+        ctx.fillRect(
+          px * (CELL_SIZE + MARGIN) + 1,
+          (grid.grid_size_y - 1 - py) * (CELL_SIZE + MARGIN) + 1,
+          CELL_SIZE - 2, CELL_SIZE - 2
+        );
+        
+        // Add a border to make it stand out
+        ctx.strokeStyle = '#000';
+        ctx.lineWidth = 6;
+        ctx.strokeRect(
+          px * (CELL_SIZE + MARGIN) + 1,
+          (grid.grid_size_y - 1 - py) * (CELL_SIZE + MARGIN) + 1,
+          CELL_SIZE - 2, CELL_SIZE - 2
+        );
+      });
+      
+      // Draw ensemble agent
+      if (ensembleState.agent_pos) {
+        const [ex, ey] = ensembleState.agent_pos;
+        ctx.fillStyle = ensemblePathColor;
+        ctx.beginPath();
+        ctx.arc(
+          ex * (CELL_SIZE + MARGIN) + CELL_SIZE / 2,
+          (grid.grid_size_y - 1 - ey) * (CELL_SIZE + MARGIN) + CELL_SIZE / 2,
+          CELL_SIZE / 2 - 2, 0, 2 * Math.PI
+        );
+        ctx.fill();
+        ctx.strokeStyle = '#000';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        
+        // Add "ENSEMBLE" label
+        ctx.fillStyle = 'black';
+        ctx.font = 'bold 10px sans-serif';
+        ctx.fillText(
+          "ENSEMBLE",
+          ex * (CELL_SIZE + MARGIN),
+          (grid.grid_size_y - 1 - ey) * (CELL_SIZE + MARGIN) - 2
+        );
+      }
+    }
+    
+    // Then draw paths and agents for each active model
     simulationData.active_models.forEach((modelName, index) => {
       const modelState = simulationData.states[modelName];
       if (!modelState) return;
