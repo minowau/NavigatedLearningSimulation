@@ -7,6 +7,7 @@ import os
 from fastapi.middleware.cors import CORSMiddleware
 from typing import List, Dict, Any, Optional
 
+
 # Load resource data from JSON file
 resource_data_path = os.path.join(os.path.dirname(__file__), "..", "extracted_data.json")
 with open(resource_data_path, "r") as f:
