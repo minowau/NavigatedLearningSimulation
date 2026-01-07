@@ -14,5 +14,5 @@ This is the frontend for the DQN grid navigation simulation. It visualizes the a
 
 ## Usage
 1. Install dependencies: `npm install`
-2. Start development server: `npm run dev`
+2. Start development server: `npm start`
 3. Open in browser and connect to backend 

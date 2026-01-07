@@ -31,15 +31,24 @@ with open(json_path, "r") as f:
     extracted_data = json.load(f)
 
 resource_cells = []
+resource_names = []
 for name, data in extracted_data.items():
     x = int(float(data['x_coordinate']) * SCALE)
     y = int(float(data['y_coordinate']) * SCALE)
     resource_cells.append((x, y))
+    resource_names.append(name)
 
 min_x = min(x for x, y in resource_cells)
 min_y = min(y for x, y in resource_cells)
 # Convert resource positions to the format used in the simulation
 adjusted_resources = [[x - min_x, y - min_y] for x, y in resource_cells]
+
+# Map grid coordinates to resource names (if multiple share a cell, keep the first)
+resource_map: Dict[str, str] = {}
+for (x_adj, y_adj), name in zip(adjusted_resources, resource_names):
+    key = f"{x_adj},{y_adj}"
+    if key not in resource_map:
+        resource_map[key] = name
 
 GRID_SIZE_X = max(x for x, y in adjusted_resources) + 1
 GRID_SIZE_Y = max(y for x, y in adjusted_resources) + 1
@@ -126,7 +135,8 @@ def get_grid():
     return {
         "grid_size_x": GRID_SIZE_X,
         "grid_size_y": GRID_SIZE_Y,
-        "resources": adjusted_resources
+        "resources": adjusted_resources,
+        "resource_map": resource_map,
     }
 
 @app.get("/state")
