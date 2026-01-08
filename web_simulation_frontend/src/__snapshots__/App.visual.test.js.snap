@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App visual structure snapshot after initial load 1`] = `
+<div
+  class="container col-span-12"
+  style="margin-top: 16px;"
+>
+  <h4
+    class="h2"
+  >
+    Agent Positions
+  </h4>
+  <div
+    class="wrap"
+  />
+</div>
+`;

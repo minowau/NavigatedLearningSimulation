@@ -9,29 +9,37 @@ function Controls({ isPlaying, onPlayPause, onStep, onReset, models, selectedMod
   };
 
   return (
-    <div style={{ margin: '16px 0' }}>
-      <div>
-        <button onClick={onPlayPause}>{isPlaying ? 'Pause' : 'Play'}</button>
-        <button onClick={onStep} disabled={isPlaying}>Step</button>
-        <button onClick={onReset}>Reset</button>
+    <aside className="controls container sidebar">
+      <div className="sidebar-title">Models</div>
+      <div className="row" role="group" aria-label="Simulation controls">
+        <button className="btn btn-primary" onClick={onPlayPause} aria-pressed={isPlaying}>
+          {isPlaying ? 'Pause' : 'Play'}
+        </button>
+        <button className="btn" onClick={onStep} disabled={isPlaying}>
+          Step
+        </button>
+        <button className="btn btn-outline" onClick={onReset}>
+          Reset
+        </button>
       </div>
       
-      <div style={{ marginTop: '12px', border: '1px solid #ccc', padding: '10px', borderRadius: '4px' }}>
-        <h4 style={{ margin: '0 0 8px 0' }}>Select Models:</h4>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+      <div className="panel card" style={{ marginTop: 12, padding: 12 }}>
+        <h4 className="h2 vis-title">Select Models</h4>
+        <div className="model-list" role="group" aria-label="Model selection">
           {models.map(model => (
-            <label key={model} style={{ display: 'flex', alignItems: 'center', marginRight: '12px' }}>
+            <label key={model} className="model-item">
               <input
                 type="checkbox"
+                aria-label={model}
                 checked={selectedModels.includes(model)}
                 onChange={() => handleModelToggle(model)}
               />
-              <span style={{ marginLeft: '4px' }}>{model}</span>
+              <span>{model}</span>
             </label>
           ))}
         </div>
       </div>
-    </div>
+    </aside>
   );
 }
 

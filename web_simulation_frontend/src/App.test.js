@@ -1,5 +1,6 @@
 import React from 'react';
 import { render, screen, waitFor, fireEvent } from '@testing-library/react';
+jest.mock('gsap');
 import App from './App';
 
 beforeEach(() => {
@@ -49,7 +50,7 @@ test('loads initial data and displays agent positions and models', async () => {
 
   render(<App />);
 
-  await waitFor(() => expect(screen.getByText(/Agent Positions/i)).toBeInTheDocument());
+  await waitFor(() => expect(screen.getByText(/Agent Status/i)).toBeInTheDocument());
 
   // Ensure backend endpoints were requested and model checkboxes render
   expect(global.fetch).toHaveBeenCalled();

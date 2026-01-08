@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Controls visual snapshot 1`] = `
+<div
+  aria-label="Simulation controls"
+  class="row"
+  role="group"
+>
+  <button
+    aria-pressed="false"
+    class="btn btn-primary"
+  >
+    Play
+  </button>
+  <button
+    class="btn"
+  >
+    Step
+  </button>
+  <button
+    class="btn btn-outline"
+  >
+    Reset
+  </button>
+</div>
+`;
