@@ -7,24 +7,60 @@ import os
 from pygame.locals import *
 
 # --- Load Resource Data ---
-SCALE = 100
+SCALE = 200
 json_path = "extracted_data.json"
 with open(json_path, "r") as f:
     extracted_data = json.load(f)
 
 resource_cells = []
+resource_names = []
 for name, data in extracted_data.items():
     x = int(float(data['x_coordinate']) * SCALE)
     y = int(float(data['y_coordinate']) * SCALE)
     resource_cells.append((x, y))
+    resource_names.append(name)
 
 # Normalize to (0, 0)
 min_x = min(x for x, y in resource_cells)
 min_y = min(y for x, y in resource_cells)
 adjusted_resources = [(x - min_x, y - min_y) for x, y in resource_cells]
 
-GRID_SIZE_X = max(x for x, y in adjusted_resources) + 1
-GRID_SIZE_Y = max(y for x, y in adjusted_resources) + 1
+# Handle duplicate coordinates by offsetting to adjacent cells
+from collections import defaultdict
+coord_groups = defaultdict(list)
+for idx, (x_adj, y_adj) in enumerate(adjusted_resources):
+    coord_groups[(x_adj, y_adj)].append((resource_names[idx], y_adj, idx))
+
+# Sort each group by y coordinate (lower y first = bottom)
+for coord in coord_groups:
+    coord_groups[coord].sort(key=lambda item: item[1])
+
+# Adjust coordinates for duplicates
+final_resources = []
+for coord, resources_at_coord in coord_groups.items():
+    x_base, y_base = coord
+    
+    if len(resources_at_coord) == 1:
+        # Single resource at this coordinate
+        final_resources.append((x_base, y_base))
+    else:
+        # Multiple resources at same coordinate - offset to adjacent cells
+        for offset_idx, (name, y_val, orig_idx) in enumerate(resources_at_coord):
+            if offset_idx == 0:
+                # First (lowest y) resource stays at original position
+                final_resources.append((x_base, y_base))
+            else:
+                # Other resources offset to adjacent cells (right/down pattern)
+                offset_x = x_base + 1 if offset_idx % 2 == 1 else x_base
+                offset_y = y_base - 1 if offset_idx % 2 == 1 else y_base + 1
+                final_resources.append((offset_x, offset_y))
+
+adjusted_resources = final_resources
+
+# Add padding to distribute resources better
+GRID_PADDING = 8
+GRID_SIZE_X = max(x for x, y in adjusted_resources) + 1 + GRID_PADDING
+GRID_SIZE_Y = max(y for x, y in adjusted_resources) + 1 + GRID_PADDING
 
 # --- Load Model ---
 class DQN(torch.nn.Module):

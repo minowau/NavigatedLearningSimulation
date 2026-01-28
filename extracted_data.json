@@ -1,562 +1,74 @@
 {
-    "Introduction to Mathematical Logic": {
-        "x_coordinate": "0.3841527218",
-        "y_coordinate": "0.3477335245"
-    },
-    "Logical Equivalence": {
-        "x_coordinate": "0.3813192430",
-        "y_coordinate": "0.3675990955"
-    },
-    "SAT Problem": {
-        "x_coordinate": "0.4409929853",
-        "y_coordinate": "0.3628683479"
-    },
-    "Rules of Inference": {
-        "x_coordinate": "0.3629053177",
-        "y_coordinate": "0.3524578440"
-    },
-    "Resolution": {
-        "x_coordinate": "0.3735056553",
-        "y_coordinate": "0.3682445425"
-    },
-    "Tutorial 1: Part I": {
-        "x_coordinate": "0.4409929853",
-        "y_coordinate": "0.3628683479"
-    },
-    "Tutorial 1: Part II": {
-        "x_coordinate": "0.3769238011",
-        "y_coordinate": "0.3656466974"
-    },
-    "Predicate Logic": {
-        "x_coordinate": "0.4119980915",
-        "y_coordinate": "0.3601891514"
-    },
-    "Rules of Inferences in Predicate Logic": {
-        "x_coordinate": "0.4199412518",
-        "y_coordinate": "0.3544573672"
-    },
-    "Proof Strategies I": {
-        "x_coordinate": "0.3764775475",
-        "y_coordinate": "0.3673360326"
-    },
-    "Proof Strategies II": {
-        "x_coordinate": "0.3735056553",
-        "y_coordinate": "0.3682445425"
-    },
-    "Induction": {
-        "x_coordinate": "0.3694385642",
-        "y_coordinate": "0.3669729427"
-    },
-    "Tutorial 2: Part I": {
-        "x_coordinate": "0.3735056579",
-        "y_coordinate": "0.3682445693"
-    },
-    "Tutorial 2: Part II": {
-        "x_coordinate": "0.3654920281",
-        "y_coordinate": "0.3565974281"
-    },
-    "Sets": {
-        "x_coordinate": "0.3891690857",
-        "y_coordinate": "0.3650968929"
-    },
-    "Relations": {
-        "x_coordinate": "0.4058324877",
-        "y_coordinate": "0.3662880980"
-    },
-    "Operations on Relations": {
-        "x_coordinate": "0.3764300644",
-        "y_coordinate": "0.3720362434"
-    },
-    "Transitive Closure of Relations": {
-        "x_coordinate": "0.3993508735",
-        "y_coordinate": "0.3741276570"
-    },
-    "Warshall's Algorithm for Computing Transitive Closure": {
-        "x_coordinate": "0.3455574086",
-        "y_coordinate": "0.3649915034"
-    },
-    "Tutorial 3": {
-        "x_coordinate": "0.4030735017",
-        "y_coordinate": "0.3682577231"
-    },
-    "Equivalence Relation": {
-        "x_coordinate": "0.3953875582",
-        "y_coordinate": "0.3528774095"
-    },
-    "Equivalence Relations and Partitions": {
-        "x_coordinate": "0.3953874571",
-        "y_coordinate": "0.3528773716"
-    },
-    "Partial Ordering": {
-        "x_coordinate": "0.3918608250",
-        "y_coordinate": "0.3719788264"
-    },
-    "Functions": {
-        "x_coordinate": "0.3969114443",
-        "y_coordinate": "0.3618211607"
-    },
-    "Tutorial 4: Part I": {
-        "x_coordinate": "0.3953875020",
-        "y_coordinate": "0.3528773696"
-    },
-    "Tutorial 4: Part II": {
-        "x_coordinate": "0.3984565919",
-        "y_coordinate": "0.3619038686"
-    },
-    "Countable and Uncountable Sets": {
-        "x_coordinate": "0.3876015821",
-        "y_coordinate": "0.3644035422"
-    },
-    "Examples of Countably Infinite Sets": {
-        "x_coordinate": "0.3824547406",
-        "y_coordinate": "0.3758112505"
-    },
-    "Cantor's Diagonalization Argument": {
-        "x_coordinate": "0.3824448652",
-        "y_coordinate": "0.3868851690"
-    },
-    "Uncomputable Functions": {
-        "x_coordinate": "0.3596914074",
-        "y_coordinate": "0.3595306393"
-    },
-    "Tutorial 5": {
-        "x_coordinate": "0.3558399271",
-        "y_coordinate": "0.3518681661"
-    },
-    "Basic Rules of Counting": {
-        "x_coordinate": "0.3738625626",
-        "y_coordinate": "0.3573907891"
-    },
-    "Permutation and Combination": {
-        "x_coordinate": "0.3841180086",
-        "y_coordinate": "0.3824948292"
-    },
-    "Counting Using Recurrence Equations": {
-        "x_coordinate": "0.3767897313",
-        "y_coordinate": "0.4022299265"
-    },
-    "Solving Linear Homogeneous Recurrence Equations - Part I": {
-        "x_coordinate": "0.3555092293",
-        "y_coordinate": "0.3617716378"
-    },
-    "Solving Linear Homogeneous Recurrence Equations - Part II": {
-        "x_coordinate": "0.3555092293",
-        "y_coordinate": "0.3617716378"
-    },
-    "Tutorial 6: Part I": {
-        "x_coordinate": "0.3903737861",
-        "y_coordinate": "0.3696642571"
-    },
-    "Tutorial 6: Part II": {
-        "x_coordinate": "0.3808203356",
-        "y_coordinate": "0.3764906173"
-    },
-    "Solving Linear Non-Homogeneous Recurrence Equations": {
-        "x_coordinate": "0.3767897313",
-        "y_coordinate": "0.4022299265"
-    },
-    "Catalan Numbers": {
-        "x_coordinate": "0.3767897313",
-        "y_coordinate": "0.4022299265"
-    },
-    "Catalan Numbers - Derivation of Closed Form Formula": {
-        "x_coordinate": "0.3626235410",
-        "y_coordinate": "0.3509745173"
-    },
-    "Counting Using Principle of Inclusion-Exclusion": {
-        "x_coordinate": "0.3568368165",
-        "y_coordinate": "0.3601844172"
-    },
-    "Tutorial 7": {
-        "x_coordinate": "0.3767897621",
-        "y_coordinate": "0.4022299495"
-    },
-    "Graph Theory Basics": {
-        "x_coordinate": "0.3653363430",
-        "y_coordinate": "0.3716826907"
-    },
-    "Matching": {
-        "x_coordinate": "0.3911555124",
-        "y_coordinate": "0.3727885938"
-    },
-    "Proof of Hall's Marriage Theorem": {
-        "x_coordinate": "0.3737647850",
-        "y_coordinate": "0.3689370196"
-    },
-    "Various Operations on Graphs": {
-        "x_coordinate": "0.4081325385",
-        "y_coordinate": "0.3902642506"
-    },
-    "Vertex and Edge Connectivity": {
-        "x_coordinate": "0.3721306043",
-        "y_coordinate": "0.3570401712"
-    },
-    "Tutorial 8": {
-        "x_coordinate": "0.3476035193",
-        "y_coordinate": "0.3813563988"
-    },
-    "Euler Path and Euler Circuit": {
-        "x_coordinate": "0.3465863968",
-        "y_coordinate": "0.3650465526"
-    },
-    "Hamiltonian Circuit": {
-        "x_coordinate": "0.3712416421",
-        "y_coordinate": "0.3668874397"
-    },
-    "Vertex and Edge Coloring": {
-        "x_coordinate": "0.3487174259",
-        "y_coordinate": "0.3673417985"
-    },
-    "Tutorial 9: Part I": {
-        "x_coordinate": "0.3712098649",
-        "y_coordinate": "0.3752200349"
-    },
-    "Tutorial 9: Part II": {
-        "x_coordinate": "0.3694385642",
-        "y_coordinate": "0.3669729427"
-    },
-    "Modular Arithmetic": {
-        "x_coordinate": "0.4203189776",
-        "y_coordinate": "0.4124967743"
-    },
-    "Prime Numbers and GCD": {
-        "x_coordinate": "0.3716076641",
-        "y_coordinate": "0.3670889861"
-    },
-    "Properties of GCD and B\u00c3\u00a9zout's Theorem": {
-        "x_coordinate": "0.3982463374",
-        "y_coordinate": "0.3601083600"
-    },
-    "Linear Congruence Equations and Chinese Remainder Theorem": {
-        "x_coordinate": "0.3702667425",
-        "y_coordinate": "0.3670172489"
-    },
-    "Uniqueness Proof of the CRT": {
-        "x_coordinate": "0.3989865086",
-        "y_coordinate": "0.3828943796"
-    },
-    "Fermat's Little Theorem, Primality Testing and Carmichael Numbers": {
-        "x_coordinate": "0.3719728903",
-        "y_coordinate": "0.3675084753"
-    },
-    "Group Theory": {
-        "x_coordinate": "0.3987634114",
-        "y_coordinate": "0.3961885349"
-    },
-    "Cyclic Groups": {
-        "x_coordinate": "0.4203189776",
-        "y_coordinate": "0.4124967743"
-    },
-    "Subgroups": {
-        "x_coordinate": "0.3715965818",
-        "y_coordinate": "0.3682014166"
-    },
-    "More Applications of Groups": {
-        "x_coordinate": "0.3801069134",
-        "y_coordinate": "0.3730238450"
-    },
-    "Discrete Logarithm and Cryptographic Applications ": {
-        "x_coordinate": "0.4225684565",
-        "y_coordinate": "0.4036747708"
-    },
-    "Rings, Fields and Polynomials": {
-        "x_coordinate": "0.3932297591",
-        "y_coordinate": "0.3948014117"
-    },
-    "Polynomials Over Fields and Properties": {
-        "x_coordinate": "0.3920955690",
-        "y_coordinate": "0.3947407343"
-    },
-    "Finite Fields and Properties I": {
-        "x_coordinate": "0.3875418240",
-        "y_coordinate": "0.3727351585"
-    },
-    "Finite Fields and Properties II": {
-        "x_coordinate": "0.3925442581",
-        "y_coordinate": "0.3947647384"
-    },
-    "Primitive Element of a Finite Field": {
-        "x_coordinate": "0.3844368943",
-        "y_coordinate": "0.3834418244"
-    },
-    "Applications of Finite Fields": {
-        "x_coordinate": "0.3920955690",
-        "y_coordinate": "0.3947407343"
-    },
-    "Introduction": {
-        "x_coordinate": "0.3875119152",
-        "y_coordinate": "0.3966205902"
-    },
-    "Symmetric key Encryption": {
-        "x_coordinate": "0.3875119152",
-        "y_coordinate": "0.3966205902"
-    },
-    "Historical Ciphers and their Cryptanalysis": {
-        "x_coordinate": "0.3862652066",
-        "y_coordinate": "0.3955856450"
-    },
-    "Perfect Security": {
-        "x_coordinate": "0.3554309105",
-        "y_coordinate": "0.3628308337"
-    },
-    "Limitations of Perfect Security": {
-        "x_coordinate": "0.3883837903",
-        "y_coordinate": "0.3936131279"
-    },
-    "Introduction to Computational Security": {
-        "x_coordinate": "0.3875119152",
-        "y_coordinate": "0.3966205902"
-    },
-    "Semantic Security": {
-        "x_coordinate": "0.3864991898",
-        "y_coordinate": "0.3677396671"
-    },
-    "Pseudo random Generators PRGs": {
-        "x_coordinate": "0.3657253671",
-        "y_coordinate": "0.3678055044"
-    },
-    "Operations on Pseudorandom Generators": {
-        "x_coordinate": "0.3679470947",
-        "y_coordinate": "0.3817776983"
-    },
-    "Stream Ciphers": {
-        "x_coordinate": "0.3712521370",
-        "y_coordinate": "0.3764532210"
-    },
-    "Provably secure Instantiation of PRG": {
-        "x_coordinate": "0.3698228254",
-        "y_coordinate": "0.3788097979"
-    },
-    "Practical Instantiations of PRG": {
-        "x_coordinate": "0.3567930736",
-        "y_coordinate": "0.3546049077"
-    },
-    "CPA security": {
-        "x_coordinate": "0.3584037754",
-        "y_coordinate": "0.3662902676"
-    },
-    "Pseudo random Functions PRFs": {
-        "x_coordinate": "0.3875119152",
-        "y_coordinate": "0.3966205902"
-    },
-    "CPA secure Encryption from PRF": {
-        "x_coordinate": "0.3864991898",
-        "y_coordinate": "0.3677396671"
-    },
-    "Modes of Operations of Block Ciphers Part I": {
-        "x_coordinate": "0.3609910381",
-        "y_coordinate": "0.3670273241"
-    },
-    "Modes of Operations of Block Ciphers Part II": {
-        "x_coordinate": "0.3617531980",
-        "y_coordinate": "0.3652916166"
-    },
-    "Theoretical Constructions of Block Ciphers": {
-        "x_coordinate": "0.3875119152",
-        "y_coordinate": "0.3966205902"
-    },
-    "Practical Constructions of Block Ciphers  Part I": {
-        "x_coordinate": "0.3522808513",
-        "y_coordinate": "0.3691869123"
-    },
-    "Practical Constructions of Block Ciphers  Part II": {
-        "x_coordinate": "0.3875119152",
-        "y_coordinate": "0.3966205902"
-    },
-    "From Passive to Active Adversary": {
-        "x_coordinate": "0.3580858004",
-        "y_coordinate": "0.3609790536"
-    },
-    "Message Integrity and Authentication": {
-        "x_coordinate": "0.3810782804",
-        "y_coordinate": "0.3777584268"
-    },
-    "Message Authentication for Long Messages   Part I": {
-        "x_coordinate": "0.3716145905",
-        "y_coordinate": "0.3772055585"
-    },
-    "Message Authentication for Long Messages   Part II": {
-        "x_coordinate": "0.3573232064",
-        "y_coordinate": "0.3557973997"
-    },
-    "Information theoretic MACs   Part I": {
-        "x_coordinate": "0.3698228254",
-        "y_coordinate": "0.3788097979"
-    },
-    "Information theoretic MACs   Part II": {
-        "x_coordinate": "0.3832458940",
-        "y_coordinate": "0.3790475584"
-    },
-    "Cryptographic Hash Functions   Part I": {
-        "x_coordinate": "0.3636201498",
-        "y_coordinate": "0.3919446561"
-    },
-    "Cryptographic Hash Functions  Part II": {
-        "x_coordinate": "0.3582311699",
-        "y_coordinate": "0.3587645673"
-    },
-    "Message Authentication Using Hash Functions": {
-        "x_coordinate": "0.3640013453",
-        "y_coordinate": "0.3910765392"
-    },
-    "Generic Attacks on Hash Functions and Additional Applications of Hash Functions": {
-        "x_coordinate": "0.3728562835",
-        "y_coordinate": "0.3817687575"
-    },
-    "Random Oracle Model  Part I": {
-        "x_coordinate": "0.3703087038",
-        "y_coordinate": "0.3788357917"
-    },
-    "Random Oracle Model  Part II": {
-        "x_coordinate": "0.3543423797",
-        "y_coordinate": "0.3632628531"
-    },
-    "Authenticated Encryption": {
-        "x_coordinate": "0.3739885790",
-        "y_coordinate": "0.3717991474"
-    },
-    "Composing CPA secure Cipher with a Secure MAC   Part I": {
-        "x_coordinate": "0.3597576937",
-        "y_coordinate": "0.3733482359"
-    },
-    "Composing CPA secure Cipher with a Secure MAC  Part II": {
-        "x_coordinate": "0.3739885790",
-        "y_coordinate": "0.3717991474"
-    },
-    "Key Exchange Protocols   Part I": {
-        "x_coordinate": "0.3693821949",
-        "y_coordinate": "0.3646524359"
-    },
-    "Key Exchange Protocols   Part II": {
-        "x_coordinate": "0.3743572725",
-        "y_coordinate": "0.3551415186"
-    },
-    "Cyclic groups": {
-        "x_coordinate": "0.3684553148",
-        "y_coordinate": "0.3685536631"
-    },
-    "Cryptographic Hardness Assumptions in the Cyclic Groups": {
-        "x_coordinate": "0.3623650699",
-        "y_coordinate": "0.3745850709"
-    },
-    "Candidate Cyclic Groups for Cryptographic Purposes   Part I": {
-        "x_coordinate": "0.3607234026",
-        "y_coordinate": "0.3783237278"
-    },
-    "Candidate Cyclic Groups for Cryptographic Purposes   Part II": {
-        "x_coordinate": "0.3875119152",
-        "y_coordinate": "0.3966205902"
-    },
-    "Cryptographic Applications of the Discrete Log Assumption": {
-        "x_coordinate": "0.3546299597",
-        "y_coordinate": "0.3606319675"
-    },
-    "Public key Encryption": {
-        "x_coordinate": "0.3626421661",
-        "y_coordinate": "0.3613596705"
-    },
-    "El Gamal Public key Encryption Scheme": {
-        "x_coordinate": "0.3577875242",
-        "y_coordinate": "0.3569219237"
-    },
-    "RSA Assumption": {
-        "x_coordinate": "0.3552579713",
-        "y_coordinate": "0.3596310644"
-    },
-    " RSA Public key Cryptosystem": {
-        "x_coordinate": "0.3521160602",
-        "y_coordinate": "0.3710380425"
-    },
-    "Hybrid Public key Cryptosystem": {
-        "x_coordinate": "0.3804430541",
-        "y_coordinate": "0.3715566797"
-    },
-    "CCA Secure Public key Ciphers": {
-        "x_coordinate": "0.3851111480",
-        "y_coordinate": "0.4016120992"
-    },
-    "CCA Secure Public key Ciphers Based on Diffie Hellman Problems": {
-        "x_coordinate": "0.3703741066",
-        "y_coordinate": "0.3589566618"
-    },
-    "CCA Secure Public key Ciphers Based on RSA Assumption": {
-        "x_coordinate": "0.3541251006",
-        "y_coordinate": "0.3573016352"
-    },
-    "Digital Signatures": {
-        "x_coordinate": "0.3584519859",
-        "y_coordinate": "0.3615682139"
-    },
-    "RSA Signatures": {
-        "x_coordinate": "0.3560725418",
-        "y_coordinate": "0.3523999361"
-    },
-    "Identification Schemes": {
-        "x_coordinate": "0.3630888342",
-        "y_coordinate": "0.3732181274"
-    },
-    "Schnorr Signature Scheme and TLS or SSL": {
-        "x_coordinate": "0.3665574805",
-        "y_coordinate": "0.3613917239"
-    },
-    "Number Theory": {
-        "x_coordinate": "0.3859618869",
-        "y_coordinate": "0.4016580870"
-    },
-    "Secret Sharing": {
-        "x_coordinate": "0.3623650699",
-        "y_coordinate": "0.3745850709"
-    },
-    "Zero Knowledge Protocols   Part I": {
-        "x_coordinate": "0.3596458423",
-        "y_coordinate": "0.3650431498"
-    },
-    "Zero Knowledge Protocols   Part II": {
-        "x_coordinate": "0.3596235243",
-        "y_coordinate": "0.3747677345"
-    },
-    "Good Bye for Now": {
-        "x_coordinate": "0.3875119152",
-        "y_coordinate": "0.3966205902"
-    },
-    "Quiz-1": {
-        "x_coordinate": "0.3869132946",
-        "y_coordinate": "0.3879161587"
-    },
-    "Quiz-2": {
-        "x_coordinate": "0.3882419407",
-        "y_coordinate": "0.3892351828"
-    },
-    "Quiz-3": {
-        "x_coordinate": "0.3835466620",
-        "y_coordinate": "0.3843365806"
-    },
-    "Quiz-4": {
-        "x_coordinate": "0.3769717929",
-        "y_coordinate": "0.3789412794"
-    },
-    "Introduction to DP": {
-        "x_coordinate": "0.2742582853",
-        "y_coordinate": "0.2742582853"
-    },
-    "Introduction to DP Methods": {
-        "x_coordinate": "0.2711406229",
-        "y_coordinate": "0.2711406229"
-    },
-    "Dynamic Programming Time Complexity": {
-        "x_coordinate": "0.2464085698",
-        "y_coordinate": "0.2464085698"
-    },
-    "youtube video": {
-        "x_coordinate": "0.2645489559",
-        "y_coordinate": "0.2645489559"
-    },
-    "Test PDF": {
-        "x_coordinate": "0.2645494477",
-        "y_coordinate": "0.2645494477"
-    },
-    "PDF1": {
-        "x_coordinate": "0.2687598661",
-        "y_coordinate": "0.2687598661"
+    "Pre training objectives": {
+        "x_coordinate": "0.4862954103464032",
+        "y_coordinate": "0.49787153156619324"
+    },
+    "Pre trained models": {
+        "x_coordinate": "0.48429538189323884",
+        "y_coordinate": "0.4993041040569235"
+    },
+    "Tutorial: Introduction to huggingface": {
+        "x_coordinate": "0.5024064321787484",
+        "y_coordinate": "0.5106210120368269"
+    },
+    "Fine tuning LLM": {
+        "x_coordinate": "0.5042982250776025",
+        "y_coordinate": "0.5115213783170383"
+    },
+    "Instruction tuning": {
+        "x_coordinate": "0.4792404121191096",
+        "y_coordinate": "0.4867641070735197"
+    },
+    "Prompt based learning": {
+        "x_coordinate": "0.4722207755912915",
+        "y_coordinate": "0.4783453373425788"
+    },
+    "Parameter efficient fine tuning": {
+        "x_coordinate": "0.47786308494621166",
+        "y_coordinate": "0.4806988137391913"
+    },
+    "Incontext Learning": {
+        "x_coordinate": "0.47602131779882284",
+        "y_coordinate": "0.47852402612316214"
+    },
+    "Prompting methods": {
+        "x_coordinate": "0.47602131779882284",
+        "y_coordinate": "0.47852402612316214"
+    },
+    "Retrieval Methods": {
+        "x_coordinate": "0.49062728582488646",
+        "y_coordinate": "0.4860916804860428"
+    },
+    "Retrieval Augmented Generation": {
+        "x_coordinate": "0.4736561172492999",
+        "y_coordinate": "0.4720369300624434"
+    },
+    "Quantization": {
+        "x_coordinate": "0.5311205842944364",
+        "y_coordinate": "0.5285926654832978"
+    },
+    "Mixture of Experts Model": {
+        "x_coordinate": "0.5086697420960135",
+        "y_coordinate": "0.5102847445191707"
+    },
+    "Agentic AI": {
+        "x_coordinate": "0.4850265095912456",
+        "y_coordinate": "0.4849493476190232"
+    },
+    "Multimodal LLMs": {
+        "x_coordinate": "0.49136304438818046",
+        "y_coordinate": "0.4892019617746457"
+    },
+    "Vision Language Models": {
+        "x_coordinate": "0.5020476558818721",
+        "y_coordinate": "0.49609876040124545"
+    },
+    "Policy learning using DQN": {
+        "x_coordinate": "0.5078705892582778",
+        "y_coordinate": "0.5014379122768156"
+    },
+    "RLHF": {
+        "x_coordinate": "0.546024227958915",
+        "y_coordinate": "0.5441248780763337"
     }
 }

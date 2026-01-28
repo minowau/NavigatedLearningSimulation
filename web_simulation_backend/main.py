@@ -25,7 +25,7 @@ app.add_middleware(
 )
 
 # --- Load Resource Data ---
-SCALE = 100
+SCALE = 200
 json_path = os.path.join(os.path.dirname(__file__), "..", "extracted_data.json")
 with open(json_path, "r") as f:
     extracted_data = json.load(f)
@@ -43,15 +43,49 @@ min_y = min(y for x, y in resource_cells)
 # Convert resource positions to the format used in the simulation
 adjusted_resources = [[x - min_x, y - min_y] for x, y in resource_cells]
 
-# Map grid coordinates to resource names (if multiple share a cell, keep the first)
-resource_map: Dict[str, str] = {}
-for (x_adj, y_adj), name in zip(adjusted_resources, resource_names):
-    key = f"{x_adj},{y_adj}"
-    if key not in resource_map:
-        resource_map[key] = name
+# Handle duplicate coordinates by offsetting to adjacent cells
+from collections import defaultdict
+coord_groups = defaultdict(list)
+for idx, (x_adj, y_adj) in enumerate(adjusted_resources):
+    coord_groups[(x_adj, y_adj)].append((resource_names[idx], y_adj, idx))
 
-GRID_SIZE_X = max(x for x, y in adjusted_resources) + 1
-GRID_SIZE_Y = max(y for x, y in adjusted_resources) + 1
+# Sort each group by y coordinate (lower y first = bottom)
+for coord in coord_groups:
+    coord_groups[coord].sort(key=lambda item: item[1])
+
+# Adjust coordinates for duplicates and build final resource list
+final_resources = []
+resource_map: Dict[str, str] = {}
+
+for coord, resources_at_coord in coord_groups.items():
+    x_base, y_base = coord
+    
+    if len(resources_at_coord) == 1:
+        # Single resource at this coordinate
+        name = resources_at_coord[0][0]
+        final_resources.append([x_base, y_base])
+        resource_map[f"{x_base},{y_base}"] = name
+    else:
+        # Multiple resources at same coordinate - offset to adjacent cells
+        for offset_idx, (name, y_val, orig_idx) in enumerate(resources_at_coord):
+            if offset_idx == 0:
+                # First (lowest y) resource stays at original position
+                final_resources.append([x_base, y_base])
+                resource_map[f"{x_base},{y_base}"] = name
+            else:
+                # Other resources offset to adjacent cells (right/down pattern)
+                # Use different offsets for each duplicate
+                offset_x = x_base + 1 if offset_idx % 2 == 1 else x_base
+                offset_y = y_base - 1 if offset_idx % 2 == 1 else y_base + 1
+                final_resources.append([offset_x, offset_y])
+                resource_map[f"{offset_x},{offset_y}"] = name
+
+adjusted_resources = final_resources
+
+# Add padding to distribute resources better
+GRID_PADDING = 8
+GRID_SIZE_X = max(x for x, y in adjusted_resources) + 1 + GRID_PADDING
+GRID_SIZE_Y = max(y for x, y in adjusted_resources) + 1 + GRID_PADDING
 
 # --- DQN Model ---
 class DQN(torch.nn.Module):

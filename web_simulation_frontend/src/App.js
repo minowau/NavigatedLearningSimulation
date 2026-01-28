@@ -20,8 +20,8 @@ function App() {
   const [isPlaying, setIsPlaying] = useState(false);
   const playInterval = useRef(null);
   const [loading, setLoading] = useState(true);
-  const CELL_SIZE = 32;
-  const MARGIN = 2;
+  const CELL_SIZE = 40;
+  const MARGIN = 3;
   const arrowAnimationsRef = useRef({});
   const lastSegmentsRef = useRef({});
   const highlightsRef = useRef([]);
@@ -150,14 +150,28 @@ function App() {
       }
     }
     
-    // Draw resources
+    // Draw resources with labels
     for (const [rx, ry] of grid.resources) {
-      ctx.fillStyle = '#222';
-      ctx.font = '20px sans-serif';
-      ctx.fillText('📚',
-        rx * (CELL_SIZE + MARGIN) + 6,
-        (grid.grid_size_y - 1 - ry) * (CELL_SIZE + MARGIN) + 24
-      );
+      const cellX = rx * (CELL_SIZE + MARGIN);
+      const cellY = (grid.grid_size_y - 1 - ry) * (CELL_SIZE + MARGIN);
+      
+      // Draw resource indicator circle
+      ctx.fillStyle = '#ff9800';
+      ctx.shadowColor = 'rgba(255, 152, 0, 0.4)';
+      ctx.shadowBlur = 8;
+      ctx.beginPath();
+      ctx.arc(cellX + CELL_SIZE / 2, cellY + CELL_SIZE / 2, CELL_SIZE / 2.2, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.shadowBlur = 0;
+      
+      // Draw emoji icon
+      ctx.fillStyle = '#fff';
+      ctx.font = 'bold 28px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('📚', cellX + CELL_SIZE / 2, cellY + CELL_SIZE / 2);
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'top';
     }
     
     if (highlightsRef.current.length > 0) {
@@ -514,8 +528,8 @@ function App() {
       <div className="canvas-container card container box md-w-67 lg-w-75" ref={canvasContainerRef}>
         <canvas
           ref={canvasRef}
-          width={grid.grid_size_x * (CELL_SIZE + MARGIN)}
-          height={grid.grid_size_y * (CELL_SIZE + MARGIN)}
+          width={grid.grid_size_x * (CELL_SIZE + MARGIN) + 20}
+          height={grid.grid_size_y * (CELL_SIZE + MARGIN) + 20}
           className="canvas"
         />
         {hoverInfo && (
